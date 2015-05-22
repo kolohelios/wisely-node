@@ -18,7 +18,6 @@ var CP = require('child_process');
 var Path = require('path');
 var beforeEach = lab.beforeEach;
 
-
 var server;
 
 describe('POST /users/authenticate', function(){
