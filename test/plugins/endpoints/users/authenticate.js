@@ -62,8 +62,8 @@ describe('POST /users/authenticate', function(){
       done();
     });
   });
-  it('should return an error 400 on User.authenticate because the user password is incorrect', function(done){
-    server.inject({method: 'POST', url: '/users/authenticate', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'bbb@bbb.com', password: '321'}}, function(response){
+  it('should return an error 400 on bcrypt comparison failure', function(done){
+    server.inject({method: 'POST', url: '/users/authenticate', credentials: {_id: 'b00000000000000000000002'}, payload: {email: 'test@kolohelios.com', password: '123'}}, function(response){
       expect(response.statusCode).to.equal(400);
       done();
     });

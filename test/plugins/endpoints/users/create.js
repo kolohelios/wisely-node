@@ -6,6 +6,8 @@ var Chai = require('chai');
 var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
+var User = require('../../../../lib/models/user');
+var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
@@ -13,9 +15,6 @@ var expect = Chai.expect;
 var it = lab.test;
 var before = lab.before;
 var after = lab.after;
-var CP = require('child_process');
-var Path = require('path');
-var beforeEach = lab.beforeEach;
 
 var server;
 
@@ -35,17 +34,26 @@ describe('POST /users', function(){
   });
 
   it('should create a new user', function(done){
-    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'andrew@test.com', password: '321'}},function(response){
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
       expect(response.statusCode).to.equal(200);
-      expect(response.result.email).to.equal('andrew@test.com');
+      expect(response.result.email).to.equal('jessedwards@me.com');
       expect(response.result.password).to.not.be.ok;
       done();
     });
   });
 
-  it('should create a new user', function(done){
-    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: '33andrew@test.com', password: '321'}}, function(response){
-      expect(response.statusCode).to.equal(200);
+  it('should result in a 400 error because user exists', function(done){
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '321'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      done();
+    });
+  });
+
+  it('should encounter a db error in register function', function(done){
+    var stub = Sinon.stub(User, 'register').yields(new Error());
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
       done();
     });
   });
