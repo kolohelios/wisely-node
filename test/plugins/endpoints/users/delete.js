@@ -19,10 +19,9 @@ var CP = require('child_process');
 var Path = require('path');
 var beforeEach = lab.beforeEach;
 
-
 var server;
 
-describe('GET /users', function(){
+describe('DELETE /users/{userId}/delete', function(){
   before(function(done){
     Server.init(function(err, srvr){
       if(err){ throw err; }
@@ -44,22 +43,24 @@ describe('GET /users', function(){
     });
   });
 
-  it('should return two users', function(done){
-    server.inject({method: 'GET', url: '/users', credentials: {_id: 'b00000000000000000000001'}}, function(response){
+  it('should delete a user', function(done){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002/delete', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.have.length(2);
+      expect(response.result.email).to.equal('test@kolohelios.com');
       done();
     });
   });
-  it('should return a 401 because no credentials were sent', function(done){
-    server.inject({method: 'GET', url: '/users'}, function(response){
+
+  it('should result in a 401 error because no credentials were passed', function(done){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002/delete'}, function(response){
       expect(response.statusCode).to.equal(401);
       done();
     });
   });
-  it('should encounter a db error', function(done){
-    var stub = Sinon.stub(User, 'find').yields(new Error());
-    server.inject({method: 'GET', url: '/users', credentials: {_id: 'b00000000000000000000001'}}, function(response){
+
+  it('should encounter a db error in register function', function(done){
+    var stub = Sinon.stub(User, 'findByIdAndRemove').yields(new Error());
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002/delete', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
