@@ -1,26 +1,20 @@
 [
   {
     "_id": {"$oid": "b00000000000000000000001"},
-    "firebaseId": "twitter:3",
+    "email": "jkedwards@me.com",
+    "firstName": "Jon",
+    "lastName": "Edwards",
+    "password": "aaa",
     "createdAt": {"$date": 1431541042952},
-    "role": "viewer"
+    "role": 0
   },
   {
     "_id": {"$oid": "b00000000000000000000002"},
-    "firebaseId": "facebook:5",
+    "email": "test@kolohelios.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "password": "$2a$08$CPeiE62RLzKDnQ3roiM76.ZvQC/3G81/4fTGFa9lqq9ReRHhtCJ6i",
     "createdAt": {"$date": 1431541109988},
-    "role": "viewer"
-  },
-  {
-    "_id": {"$oid": "b00000000000000000000003"},
-    "firebaseId": "facebook:6",
-    "createdAt": {"$date": 1431541109988},
-    "role": "superviewer"
-  },
-  {
-    "_id": {"$oid": "b00000000000000000000004"},
-    "firebaseId": "facebook:7",
-    "createdAt": {"$date": 1431541109988},
-    "role": "admin"
+    "role": 0
   }
 ]
