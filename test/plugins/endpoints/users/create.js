@@ -15,6 +15,9 @@ var expect = Chai.expect;
 var it = lab.test;
 var before = lab.before;
 var after = lab.after;
+var CP = require('child_process');
+var Path = require('path');
+var beforeEach = lab.beforeEach;
 
 var server;
 
@@ -30,6 +33,13 @@ describe('POST /users', function(){
   after(function(done){
     server.stop(function(){
       Mongoose.disconnect(done);
+    });
+  });
+
+  beforeEach(function(done){
+    var db = server.app.environment.MONGO_URL.split('/')[3];
+    CP.execFile(Path.join(__dirname, '../../../../scripts/clean-db.sh'), [db], {cwd: Path.join(__dirname, '../../../../scripts')}, function(){
+      done();
     });
   });
 
