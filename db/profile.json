@@ -1,0 +1,86 @@
+[
+  {
+    "_id": {"$oid": "a00000000000000000000001"},
+    "firstName": "Andrew",
+    "lastName": "Dinh",
+    "photo": "http://www.google.com",
+    "createdAt": {"$date": 1431541042952},
+    "skills": ["Joi", "Hapi", "Node"],
+    "exposure": ["Selenium", "QA", "Java", "Python"],
+    "bio": "Developer A",
+    "location": "San Jose, CA",
+    "interests": ["Soccer", "Football", "Tennis"],
+    "remote": true,
+    "relocate": false,
+    "locationPref": ["San Francisco", "Fremont", "San Jose"],
+    "education": ["edA", "edB", "edC"],
+    "contact": {
+      "email": "test1@test.com",
+      "phone": "510-345-6789",
+      "address": "125 Main St, Fremont, CA 94555"
+    },
+    "social": {
+      "github": "https://github.com/andrewtdinh",
+      "facebook": "BookFace3",
+      "twitter": "https://twitter.com/andrewtdinh",
+      "linkedIn": "https://www.linkedin.com/in/andrewtdinh",
+      "stackoverflow": "http://stackoverflow.com/users/4750158/andrewtdinh"
+    }
+  },
+  {
+    "_id": {"$oid": "a00000000000000000000002"},
+    "firstName": "Evan",
+    "lastName": "Gatchell",
+    "photo": "http://www.yahoo.com",
+    "createdAt": {"$date": 1431541242952},
+    "skills": ["Node", "Angular", "Mongo"],
+    "exposure": ["D3", "React", "Fun"],
+    "bio": "Developer B",
+    "location": "Fremont, CA",
+    "interests": ["Frontend", "Startups", "Design"],
+    "remote": true,
+    "relocate": true,
+    "locationPref": ["Los Angeles", "San Francisco", "San Jose"],
+    "education": ["edD", "edE", "edF"],
+    "contact": {
+      "email": "test2@test.com",
+      "phone": "510-345-1234",
+      "address": "345 Main St, Fremont, CA 94555"
+    },
+    "social": {
+      "github": "https://github.com/greygatch",
+      "facebook": "BookFace3",
+      "twitter": "https://twitter.com/greygatch",
+      "linkedIn": "https://www.linkedin.com/in/greygatch",
+      "stackoverflow": "http://stackoverflow.com/users/4750158/greygatch"
+    }
+  },
+  {
+    "_id": {"$oid": "a00000000000000000000003"},
+    "firstName": "Christian",
+    "lastName": "Richard",
+    "photo": "http://www.twitter.com",
+    "createdAt": {"$date": 1431541142952},
+    "skills": ["CSS", "HTML5", "Mongo", "Node"],
+    "exposure": ["React", "Express", "Ajax"],
+    "bio": "Developer C",
+    "location": "San Francisco, CA",
+    "interests": ["Backend", "Genetics", "Academia", "Biotech"],
+    "remote": true,
+    "relocate": false,
+    "locationPref": ["San Francisco, CA", "Seattle, WA", "Portland, OR"],
+    "education": ["edX", "edY", "edZ"],
+    "contact": {
+      "email": "test3@test.com",
+      "phone": "510-345-6666",
+      "address": "567 Main St, Fremont, CA 94555"
+    },
+    "social": {
+      "github": "https://github.com/lifepupil",
+      "facebook": "BookFace3",
+      "twitter": "https://twitter.com/lifepupil",
+      "linkedIn": "https://www.linkedin.com/in/lifepupil",
+      "stackoverflow": "http://stackoverflow.com/users/4750158/lifepupil"
+    }
+  }
+]

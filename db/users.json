@@ -1,0 +1,26 @@
+[
+  {
+    "_id": {"$oid": "b00000000000000000000001"},
+    "firebaseId": "twitter:3",
+    "createdAt": {"$date": 1431541042952},
+    "role": "viewer"
+  },
+  {
+    "_id": {"$oid": "b00000000000000000000002"},
+    "firebaseId": "facebook:5",
+    "createdAt": {"$date": 1431541109988},
+    "role": "viewer"
+  },
+  {
+    "_id": {"$oid": "b00000000000000000000003"},
+    "firebaseId": "facebook:6",
+    "createdAt": {"$date": 1431541109988},
+    "role": "superviewer"
+  },
+  {
+    "_id": {"$oid": "b00000000000000000000004"},
+    "firebaseId": "facebook:7",
+    "createdAt": {"$date": 1431541109988},
+    "role": "admin"
+  }
+]
