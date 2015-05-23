@@ -52,6 +52,22 @@ describe('POST /users', function(){
     });
   });
 
+  it('should return a 401 because authenticated user is not an admin', function(done){
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000002'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+
+  it('should return a 400 because authenticated user does not exist', function(done){
+    var stub = Sinon.stub(User, 'findById').yields('notauser');
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+
   it('should result in a 400 error because user exists', function(done){
     server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '321'}}, function(response){
       expect(response.statusCode).to.equal(400);
@@ -61,6 +77,15 @@ describe('POST /users', function(){
 
   it('should encounter a db error in register function', function(done){
     var stub = Sinon.stub(User, 'register').yields(new Error());
+    server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+
+  it('should encounter a db error in isAdmin function', function(done){
+    var stub = Sinon.stub(User, 'isAdmin').yields(new Error());
     server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com', password: '321'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
