@@ -6,7 +6,7 @@
     "lastName": "Edwards",
     "password": "aaa",
     "createdAt": {"$date": 1431541042952},
-    "role": 0
+    "role": 255
   },
   {
     "_id": {"$oid": "b00000000000000000000002"},
