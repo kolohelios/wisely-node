@@ -6,6 +6,8 @@ var Chai = require('chai');
 var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
+var User = require('../../../../lib/models/user');
+var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
@@ -64,6 +66,17 @@ describe('POST /projects', function(){
       done();
     });
   });
+  it('should not create a new project because authenticated user is not a project manager', function(done){
+    server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000002'},
+    payload: {name: 'Edwards remodel',
+    address: '4797 Twilight Place\nBlaine, WA 98230',
+    isRemodel: true,
+    baseCost: 18000}},
+    function(response){
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
 
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'POST', url: '/projects',
@@ -77,6 +90,20 @@ describe('POST /projects', function(){
     });
   });
 
+  it('should return a 400 because authenticated user does not exist', function(done){
+    var stub = Sinon.stub(User, 'findById').yields('notauser');
+    server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
+    payload: {name: 'Edwards remodel',
+    address: '4797 Twilight Place\nBlaine, WA 98230',
+    isRemodel: true,
+    baseCost: 18000}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+
+
   it('should return a 400 due to missing a required payload attribute', function(done){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
     payload: {address: '4797 Twilight Place\nBlaine, WA 98230',
@@ -84,6 +111,19 @@ describe('POST /projects', function(){
     baseCost: 18000}},
     function(response){
       expect(response.statusCode).to.equal(400);
+      done();
+    });
+  });
+
+  it('should encounter a db error in isProjMan function', function(done){
+    var stub = Sinon.stub(User, 'isProjMan').yields(new Error());
+    server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
+    payload: {name: 'Edwards remodel',
+      address: '4797 Twilight Place\nBlaine, WA 98230',
+      isRemodel: true,
+      baseCost: 18000}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
       done();
     });
   });
