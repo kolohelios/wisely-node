@@ -6,8 +6,6 @@ var Chai = require('chai');
 var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
-// var Project = require('../../../../lib/models/project');
-// var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
