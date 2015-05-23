@@ -1,0 +1,58 @@
+[
+  {
+    "_id": {"$oid": "c00000000000000000000001"},
+    "name": "Edwards remodel",
+    "address": "4797 Twilight Place\nBlaine, WA 98230",
+    "isRemodel": true,
+    "isActive": true,
+    "choicesAvailable": true,
+    "baseCost": 18000,
+    "createdAt": {"$date": 1431541042952},
+    "room":
+    [
+        {
+        "name": "living room",
+        "floor": "main",
+        "itemCollections": [
+          {
+            "name": "sinks",
+            "costDriver": "each",
+            "numOfUnits": 2,
+            "items":
+              [
+                {"$oid": "d00000000000000000000002"}
+              ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": {"$oid": "c00000000000000000000002"},
+    "name": "Old shack",
+    "address": "4799 Twilight Place\nBlaine, WA 98230",
+    "isRemodel": true,
+    "isActive": true,
+    "choicesAvailable": true,
+    "baseCost": 18000,
+    "createdAt": {"$date": 1431541042952},
+    "room":
+    [
+        {
+        "name": "living room",
+        "floor": "main",
+        "itemCollections": [
+          {
+            "name": "sinks",
+            "costDriver": "each",
+            "numOfUnits": 2,
+            "items":
+              [
+                {"$oid": "d00000000000000000000002"}
+              ]
+          }
+        ]
+      }
+    ]
+  },
+]
