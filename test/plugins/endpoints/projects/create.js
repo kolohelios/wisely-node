@@ -61,7 +61,6 @@ describe('POST /projects', function(){
       expect(response.result.progMan).to.be.an('undefined');
       expect(response.result.rooms).to.have.length(0);
       expect(response.result.createdAt).to.be.within(Date.now() - 10000, Date.now() + 10000);
-      expect(response.result.createdAt).to.be.within(Date.now() - 10000, Date.now() + 10000);
       expect(response.result.createdBy.toString()).to.equal('b00000000000000000000001');
       done();
     });

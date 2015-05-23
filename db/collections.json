@@ -1,0 +1,46 @@
+[
+  {
+    "_id": {"$oid": "f00000000000000000000001"},
+    "name": "sinks",
+    "costDriver": "each",
+    "createdAt": {"$date": 1431541042952},
+    "rooms": ["bathroom", "kitchen"],
+    "items":
+    [
+      {
+        "_id": {"$oid": "d00000000000000000000002"},
+        "name": "grand master",
+        "extdDesc": "this is a fancy sink",
+        "materialPerUnit": 2500,
+        "laborHrsPerUnit": 2.5,
+        "photo": "http://img.weburbanist.com/wp-content/uploads/2009/09/Sinks_1.jpg"
+      },
+      {
+        "_id": {"$oid": "d00000000000000000000002"},
+        "name": "value master",
+        "extdDesc": "this is a cheap sink",
+        "materialPerUnit": 250,
+        "laborHrsPerUnit": 1.5,
+        "photo": "http://i00.i.aliimg.com/wsphoto/v0/32334921736_1/-font-b-Sink-b-font-Chrome-Popup-Drain-font-b-Combo-b-font-14-x18.jpg"
+      }
+    ]
+  },
+  {
+    "_id": {"$oid": "f00000000000000000000002"},
+    "name": "toilets",
+    "costDriver": "each",
+    "createdAt": {"$date": 1431541042952},
+    "rooms": ["bathroom"],
+    "items":
+    [
+      {
+        "_id": {"$oid": "d00000000000000000000003"},
+        "name": "cheap toilet",
+        "extdDesc": "this is a cheap toilet",
+        "materialPerUnit": 100,
+        "laborHrsPerUnit": 3,
+        "photo": "http://google.com"
+      }
+    ]
+  }
+]
