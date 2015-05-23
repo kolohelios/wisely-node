@@ -51,6 +51,13 @@ describe('PUT /users/{userId}/update', function(){
       done();
     });
   });
+  it('should return a 401 because authenticated user is not an admin', function(done){
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000002/update', credentials: {_id: 'b00000000000000000000002'}, payload: {email: 'jessedwards@me.com'}}, function(response){
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+
   it('should return a 400 because user to update was not found', function(done){
     server.inject({method: 'PUT', url: '/users/nouserhere/update', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessica@me.com'}}, function(response){
       expect(response.statusCode).to.equal(400);
@@ -66,6 +73,15 @@ describe('PUT /users/{userId}/update', function(){
   it('should encounter a db error', function(done){
     var stub = Sinon.stub(User, 'findByIdAndUpdate').yields(new Error());
     server.inject({method: 'PUT', url: '/users/b00000000000000000000001/update', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+
+  it('should encounter a db error in isAdmin function', function(done){
+    var stub = Sinon.stub(User, 'isAdmin').yields(new Error());
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000002/update', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessedwards@me.com'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();

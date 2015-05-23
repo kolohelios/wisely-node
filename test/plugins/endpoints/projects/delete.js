@@ -7,6 +7,7 @@ var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var Project = require('../../../../lib/models/project');
+var User = require('../../../../lib/models/user');
 var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
@@ -52,6 +53,14 @@ describe('DELETE /projects/{projectId}/delete', function(){
     });
   });
 
+  it('should return a 401 because authenticated user is not a project manager', function(done){
+    server.inject({method: 'DELETE', url: '/projects/c00000000000000000000001/delete', credentials: {_id: 'b00000000000000000000002'}},
+    function(response){
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'DELETE', url: '/projects/c00000000000000000000001/delete'},
     function(response){
@@ -70,6 +79,14 @@ describe('DELETE /projects/{projectId}/delete', function(){
 
   it('should encounter a db error', function(done){
     var stub = Sinon.stub(Project, 'findOneAndRemove').yields(new Error());
+    server.inject({method: 'DELETE', url: '/projects/c00000000000000000000001/delete', credentials: {_id: 'b00000000000000000000001'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+  it('should encounter a db error in isProjMan', function(done){
+    var stub = Sinon.stub(User, 'isProjMan').yields(new Error());
     server.inject({method: 'DELETE', url: '/projects/c00000000000000000000001/delete', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();

@@ -7,6 +7,7 @@ var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var Project = require('../../../../lib/models/project');
+var User = require('../../../../lib/models/user');
 var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
@@ -56,6 +57,18 @@ describe('UPDATE /projects/{projectId}/update', function(){
     });
   });
 
+  it('should return a 401 because authenticated user is not a project manager', function(done){
+    server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
+    address: '5000 Twilight Place\nBlaine, WA 98230',
+    isRemodel: true,
+    baseCost: 18000},
+    credentials: {_id: 'b00000000000000000000002'}},
+    function(response){
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
@@ -80,6 +93,18 @@ describe('UPDATE /projects/{projectId}/update', function(){
 
   it('should encounter a db error', function(done){
     var stub = Sinon.stub(Project, 'findByIdAndUpdate').yields(new Error());
+    server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
+    address: '5000 Twilight Place\nBlaine, WA 98230',
+    isRemodel: true,
+    baseCost: 18000},
+    credentials: {_id: 'b00000000000000000000001'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+  it('should encounter a db error in isProjMan', function(done){
+    var stub = Sinon.stub(User, 'isProjMan').yields(new Error());
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
     isRemodel: true,
