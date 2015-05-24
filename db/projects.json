@@ -7,6 +7,7 @@
     "isActive": true,
     "choicesAvailable": true,
     "baseCost": 18000,
+    "photo": "http://photos1.zillowstatic.com/p_h/ISuxup42jbgkgz.jpg",
     "createdAt": {"$date": 1431541042952},
     "room":
     [
@@ -35,6 +36,7 @@
     "isActive": true,
     "choicesAvailable": true,
     "baseCost": 18000,
+    "photo": "http://www.loyola.edu/library/citythatreads/site10/images/shack.jpg",
     "createdAt": {"$date": 1431541042952},
     "room":
     [

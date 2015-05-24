@@ -46,8 +46,7 @@ describe('GET /configurations', function(){
   it('should get configuration', function(done){
     server.inject({method: 'GET', url: '/configurations', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(200);
-      console.log('*************************************', response.result);
-      expect(response.result.length).to.equal(2);
+      expect(response.result.length).to.equal(1);
       done();
     });
   });
