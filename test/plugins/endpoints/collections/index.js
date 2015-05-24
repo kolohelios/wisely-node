@@ -30,7 +30,6 @@ describe('GET /collections', function(){
       done();
     });
   });
-
   after(function(done){
     server.stop(function(){
       Mongoose.disconnect(done);
