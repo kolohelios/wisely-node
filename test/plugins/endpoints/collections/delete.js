@@ -36,7 +36,6 @@ describe('DELETE /collections/{collectionId}/delete', function(){
       Mongoose.disconnect(done);
     });
   });
-
   beforeEach(function(done){
     var db = server.app.environment.MONGO_URL.split('/')[3];
     CP.execFile(Path.join(__dirname, '../../../../scripts/clean-db.sh'), [db], {cwd: Path.join(__dirname, '../../../../scripts')}, function(){

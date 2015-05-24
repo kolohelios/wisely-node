@@ -1,0 +1,22 @@
+[
+  {
+    "_id": {"$oid": "e00000000000000000000001"},
+    "config":
+    {
+      "name": "rooms",
+      "contents": ["living room", "bedroom", "bathroom", "kitchen", "garage", "office", "utility room"]
+    }
+  },
+  {
+    "_id": {"$oid": "e00000000000000000000002"},
+    "config":
+    {
+      "name": "roles",
+      "contents": [
+        {"client": 1},
+        {"project manager": 127},
+        {"admin": 255}
+      ]
+    }
+  }
+]
