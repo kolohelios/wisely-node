@@ -44,10 +44,10 @@ describe('GET /users', function(){
     });
   });
 
-  it('should return two users', function(done){
+  it('should return 3 users', function(done){
     server.inject({method: 'GET', url: '/users', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.have.length(2);
+      expect(response.result).to.have.length(3);
       done();
     });
   });
