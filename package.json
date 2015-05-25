@@ -16,7 +16,6 @@
     "coverage": "lab -s -r lcov | coveralls"
   },
   "dependencies": {
-    "async": "^1.0.0",
     "bcrypt": "^0.8.3",
     "blipp": "^2.1.3",
     "good": "^6.1.2",
