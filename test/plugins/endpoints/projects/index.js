@@ -7,6 +7,7 @@ var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var Project = require('../../../../lib/models/project');
+var User = require('../../../../lib/models/user');
 var Sinon = require('sinon');
 
 var lab = exports.lab = Lab.script();
@@ -43,7 +44,7 @@ describe('GET /projects', function(){
     });
   });
 
-  it('should get all projects', function(done){
+  it('should get all projects for an admin', function(done){
     server.inject({method: 'GET', url: '/projects', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(200);
       expect(response.result.length).to.equal(2);
@@ -63,6 +64,21 @@ describe('GET /projects', function(){
     server.inject({method: 'GET', url: '/projects', credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
+      done();
+    });
+  });
+  it('should encounter a db error in isProjMan', function(done){
+    var stub = Sinon.stub(User, 'isProjMan').yields(new Error());
+    server.inject({method: 'GET', url: '/projects', credentials: {_id: 'b00000000000000000000001'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
+  it('should return one record belonging to client (isProjMan is false)', function(done){
+    server.inject({method: 'GET', url: '/projects', credentials: {_id: 'b00000000000000000000003'}}, function(response){
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.length).to.equal(1);
       done();
     });
   });

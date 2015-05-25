@@ -16,5 +16,14 @@
     "password": "$2a$08$CPeiE62RLzKDnQ3roiM76.ZvQC/3G81/4fTGFa9lqq9ReRHhtCJ6i",
     "createdAt": {"$date": 1431541109988},
     "role": 0
+  },
+  {
+    "_id": {"$oid": "b00000000000000000000003"},
+    "email": "nottheclient@test.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "password": "$2a$08$CPeiE62RLzKDnQ3roiM76.ZvQC/3G81/4fTGFa9lqq9ReRHhtCJ6i",
+    "createdAt": {"$date": 1431541109988},
+    "role": 1
   }
 ]
