@@ -51,6 +51,14 @@ describe('GET /collections', function(){
     });
   });
 
+  it('should get two collections based on room query', function(done){
+    server.inject({method: 'GET', url: '/collections?room=bathroom', credentials: {_id: 'b00000000000000000000001'}}, function(response){
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.length).to.equal(2);
+      done();
+    });
+  });
+
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'GET', url: '/collections'}, function(response){
       expect(response.statusCode).to.equal(401);
