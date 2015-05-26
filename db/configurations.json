@@ -5,6 +5,10 @@
       {"role": "client", "permission": 1},
       {"role": "project manager", "permission": 127},
       {"role": "admin", "permission": 255}
+    ],
+    "rates": [
+      {"element": "multiplier", "rate": 1.2},
+      {"element": "labor", "rate": 70}
     ]
   }
 ]
