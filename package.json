@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "lab -v -c -t 100 -L -n eslint -e test",
+    "test": "lab --timeout 10000 -v -c -t 100 -L -n eslint -e test",
     "coverage": "lab -s -r lcov | coveralls"
   },
   "dependencies": {
@@ -26,7 +26,8 @@
     "joi": "^6.4.1",
     "jwt-simple": "^0.3.0",
     "moment": "^2.10.3",
-    "mongoose": "^4.0.3"
+    "mongoose": "^4.0.3",
+    "node-mandrill": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^2.3.0",
