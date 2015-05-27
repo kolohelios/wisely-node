@@ -58,14 +58,6 @@ describe('GET /messages/email', function(){
       done();
     });
   });
-  it('should get a 400 due to error in mandrill', function(done){
-    var stub = Sinon.stub(mandrill, 'sendMessage').yields(new Error());
-    server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
-      expect(response.statusCode).to.equal(400);
-      stub.restore();
-      done();
-    });
-  });
 
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'POST', url: '/messages/email'}, function(response){
