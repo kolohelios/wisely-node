@@ -47,8 +47,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
   it('should update a project', function(done){
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000},
+    isRemodel: true},
     credentials: {_id: 'b00000000000000000000001'}},
     function(response){
       expect(response.statusCode).to.equal(200);
@@ -60,8 +59,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
   it('should return a 401 because authenticated user is not a project manager', function(done){
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000},
+    isRemodel: true},
     credentials: {_id: 'b00000000000000000000002'}},
     function(response){
       expect(response.statusCode).to.equal(401);
@@ -72,8 +70,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
   it('should return a 401 due to missing credentials', function(done){
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}},
+    isRemodel: true}},
     function(response){
       expect(response.statusCode).to.equal(401);
       done();
@@ -82,8 +79,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
 
   it('should return a 400 due to missing parameter', function(done){
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
-    isRemodel: true,
-    baseCost: 18000},
+    isRemodel: true},
     credentials: {_id: 'b00000000000000000000001'}},
     function(response){
       expect(response.statusCode).to.equal(400);
@@ -95,8 +91,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
     var stub = Sinon.stub(Project, 'findByIdAndUpdate').yields(new Error());
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000},
+    isRemodel: true},
     credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
@@ -107,8 +102,7 @@ describe('UPDATE /projects/{projectId}/update', function(){
     var stub = Sinon.stub(User, 'isProjMan').yields(new Error());
     server.inject({method: 'PUT', url: '/projects/c00000000000000000000001/update', payload: {name: 'Wyle remodel',
     address: '5000 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000},
+    isRemodel: true},
     credentials: {_id: 'b00000000000000000000001'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();

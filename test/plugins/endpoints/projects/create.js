@@ -47,8 +47,7 @@ describe('POST /projects', function(){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
     payload: {name: 'Edwards remodel',
     address: '4797 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}},
+    isRemodel: true}},
     function(response){
       expect(response.statusCode).to.equal(200);
       expect(response.result.name).to.equal('Edwards remodel');
@@ -56,7 +55,6 @@ describe('POST /projects', function(){
       expect(response.result.isRemodel).to.equal(true);
       expect(response.result.isActive).to.equal(true);
       expect(response.result.choicesAvailable).to.equal(true);
-      expect(response.result.baseCost).to.equal(18000);
       expect(response.result.client).to.be.an('undefined');
       expect(response.result.progMan).to.be.an('undefined');
       expect(response.result.rooms).to.have.length(0);
@@ -69,8 +67,7 @@ describe('POST /projects', function(){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000002'},
     payload: {name: 'Edwards remodel',
     address: '4797 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}},
+    isRemodel: true}},
     function(response){
       expect(response.statusCode).to.equal(401);
       done();
@@ -81,8 +78,7 @@ describe('POST /projects', function(){
     server.inject({method: 'POST', url: '/projects',
     payload: {name: 'Edwards remodel',
     address: '4797 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}},
+    isRemodel: true}},
     function(response){
       expect(response.statusCode).to.equal(401);
       done();
@@ -94,8 +90,7 @@ describe('POST /projects', function(){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
     payload: {name: 'Edwards remodel',
     address: '4797 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}}, function(response){
+    isRemodel: true}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
@@ -106,8 +101,7 @@ describe('POST /projects', function(){
   it('should return a 400 due to missing a required payload attribute', function(done){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
     payload: {address: '4797 Twilight Place\nBlaine, WA 98230',
-    isRemodel: true,
-    baseCost: 18000}},
+    isRemodel: true}},
     function(response){
       expect(response.statusCode).to.equal(400);
       done();
@@ -119,8 +113,7 @@ describe('POST /projects', function(){
     server.inject({method: 'POST', url: '/projects', credentials: {_id: 'b00000000000000000000001'},
     payload: {name: 'Edwards remodel',
       address: '4797 Twilight Place\nBlaine, WA 98230',
-      isRemodel: true,
-      baseCost: 18000}}, function(response){
+      isRemodel: true}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
