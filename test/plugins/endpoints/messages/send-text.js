@@ -7,7 +7,7 @@ var Lab = require('lab');
 var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var Sinon = require('sinon');
-var mandrill = require('../../../../lib/models/mandrill');
+var twilio = require('../../../../lib/models/twilio');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
@@ -45,32 +45,32 @@ describe('GET /messages/email', function(){
   });
 
   it('should get 200 on successful auth and send message', function(done){
-    server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
+    server.inject({method: 'POST', url: '/messages/text', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
+  // it('should get a 400 due to error in mandrill', function(done){
+  //   var stub = Sinon.stub(mandrill, 'sendMessage').yields(new Error());
+  //   server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
+  //     expect(response.statusCode).to.equal(400);
+  //     stub.restore();
+  //     done();
+  //   });
+  // });
   it('should get a 400 due to error in mandrill', function(done){
-    var stub = Sinon.stub(mandrill, 'sendMessage').yields(new Error());
-    server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
+    var stub = Sinon.stub(twilio, 'sendText').yields(new Error());
+    server.inject({method: 'POST', url: '/messages/text', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
     });
   });
-  it('should get a 400 due to error in mandrill', function(done){
-    var stub = Sinon.stub(mandrill, 'sendMessage').yields(new Error());
-    server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
-      expect(response.statusCode).to.equal(400);
-      stub.restore();
-      done();
-    });
-  });
-
-  it('should return a 401 due to missing credentials', function(done){
-    server.inject({method: 'POST', url: '/messages/email'}, function(response){
-      expect(response.statusCode).to.equal(401);
-      done();
-    });
-  });
+  //
+  // it('should return a 401 due to missing credentials', function(done){
+  //   server.inject({method: 'POST', url: '/messages/email'}, function(response){
+  //     expect(response.statusCode).to.equal(401);
+  //     done();
+  //   });
+  // });
 });
