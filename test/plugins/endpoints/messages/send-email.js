@@ -8,6 +8,8 @@ var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var Sinon = require('sinon');
 var mandrill = require('../../../../lib/models/mandrill');
+// var mandrill = require('mandrill-api');
+// var mandrillClient = new mandrill.Mandrill(process.env.MANDRILL_API_KEY);
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
@@ -50,7 +52,8 @@ describe('GET /messages/email', function(){
       done();
     });
   });
-  it('should get a 400 due to error in mandrill', function(done){
+
+  it('should get a 400 due to error in Mandrill', function(done){
     var stub = Sinon.stub(mandrill, 'sendMessage').yields(new Error());
     server.inject({method: 'POST', url: '/messages/email', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jkedwards@me.com', password: '1111'}}, function(response){
       expect(response.statusCode).to.equal(400);
