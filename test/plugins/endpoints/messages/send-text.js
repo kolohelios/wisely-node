@@ -51,7 +51,7 @@ describe('GET /messages/email', function(){
     });
   });
   it('should get a 400 due to error in Twilio', function(done){
-    var stub = Sinon.stub(twilio.twilioGrief, 'sendMessage').yields(new Error());
+    var stub = Sinon.stub(twilio.twilioWrapper, 'sendMessage').yields(new Error());
     server.inject({method: 'POST', url: '/messages/text', credentials: {_id: 'b00000000000000000000001'}, payload: {number: '3605098185', message: 'test message from lab'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
