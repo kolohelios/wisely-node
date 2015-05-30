@@ -5,6 +5,7 @@
     "firstName": "Jon",
     "lastName": "Edwards",
     "password": "aaa",
+    "contactPref": "email",
     "createdAt": {"$date": 1431541042952},
     "role": 255
   },
@@ -14,6 +15,7 @@
     "firstName": "Test",
     "lastName": "User",
     "password": "$2a$08$CPeiE62RLzKDnQ3roiM76.ZvQC/3G81/4fTGFa9lqq9ReRHhtCJ6i",
+    "contactPref": "text",
     "createdAt": {"$date": 1431541109988},
     "role": 0
   },
@@ -23,6 +25,7 @@
     "firstName": "Test",
     "lastName": "User",
     "password": "$2a$08$CPeiE62RLzKDnQ3roiM76.ZvQC/3G81/4fTGFa9lqq9ReRHhtCJ6i",
+    "contactPref": "email",
     "createdAt": {"$date": 1431541109988},
     "role": 1
   }
