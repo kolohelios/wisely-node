@@ -51,6 +51,14 @@ describe('PUT /users/{userId}/update', function(){
       done();
     });
   });
+  it('should update a user and change password', function(done){
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000001/update', credentials: {_id: 'b00000000000000000000001'}, payload: {email: 'jessica@me.com', password: '1234'}}, function(response){
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.email).to.equal('jessica@me.com');
+      expect(response.result.password).to.not.be.ok;
+      done();
+    });
+  });
   it('should return a 401 because authenticated user is not an admin', function(done){
     server.inject({method: 'PUT', url: '/users/b00000000000000000000002/update', credentials: {_id: 'b00000000000000000000002'}, payload: {email: 'jessedwards@me.com'}}, function(response){
       expect(response.statusCode).to.equal(401);
