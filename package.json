@@ -11,7 +11,7 @@
     "coveralls": "./node_modules/coveralls/bin/coveralls.js"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "forever start nodemon --exitcrash index.js",
     "test": "lab --timeout 10000 -v -c -t 100 -L -n eslint -e test",
     "coverage": "lab -s -r lcov | coveralls"
   },
